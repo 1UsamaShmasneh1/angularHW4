@@ -1,0 +1,42 @@
+<p>sweet-cake</p>
+
+<form #myForm="ngForm" (submit)="handleSubmit(myForm)">
+    <div>
+        <input type="text" ngModel name="cakeName" placeholder="Cake Name">
+    </div>
+    <br>
+    <div>        
+        <div>Select your cake cinde:</div>
+        <input type="radio" id="chocolate" ngModel name="cakeCinde" value="Chocolate">
+        <label for="chocolate">Chocolate</label><br>
+        <input type="radio" id="chees" ngModel name="cakeCinde" value="Chees">
+        <label for="chees">Chees</label><br>
+        <input type="radio" id="carrots" ngModel name="cakeCinde" value="Carrots">
+        <label for="carrots">Carrots</label><br>
+    </div>
+    <br>
+    <div>
+        <input ngModel name="text" id="text">
+    </div>
+    <br>
+    <button>Send</button>
+</form>
+<br>
+<br>
+<div *ngIf="isSubmit; then afterSubmit"></div>
+<ng-template #afterSubmit>
+    Cake name: {{cake.cakeName}} <br>
+    Cake cinde: {{cake.cakeCinde}} <br>
+    <ng-container [ngSwitch]="cake.cakeCinde">
+        <img *ngSwitchCase="'Chocolate'" src="{{chocolateCake}}" height="200px">
+        <img *ngSwitchCase="'Chees'" src="{{cheesCake}}" height="200px">
+        <img *ngSwitchCase="'Carrots'" src="{{carrotsCake}}" height="200px">
+    </ng-container> <br>
+    <div *ngIf="isIncludesText; then comites"></div>
+    <ng-template #comites>
+        Comits:
+        <ul>
+            <li *ngFor="let t of getTextArray()">{{t}}</li>
+        </ul>
+    </ng-template>
+</ng-template>
